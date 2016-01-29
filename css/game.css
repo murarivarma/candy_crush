@@ -1,30 +1,37 @@
 * {
   box-sizing: border-box; }
 
-#board {
+#game {
   margin: 0 auto;
-  width: 105vmin;
+  width: 100vmin;
   text-align: center; }
-  #board .row {
+  #game #score-board {
+    height: 10vmin;
+    text-align: right;
+    font-size: 8vmin;
+    line-height: 10vmin;
+    background-color: #cbd0d3;
+    color: #2c3e50; }
+  #game .row {
     height: 10vmin; }
-    #board .row .cell {
+    #game .row .cell {
       display: inline-block;
       width: 10vmin;
       height: 10vmin;
       background-color: #fbfcfc;
       border: 1px solid #bdc3c7; }
-      #board .row .cell i {
+      #game .row .cell i {
         font-size: 8vmin;
         line-height: 10vmin; }
-        #board .row .cell i.fa-twitter {
+        #game .row .cell i.fa-twitter {
           color: #2ecc71; }
-        #board .row .cell i.fa-bitbucket {
+        #game .row .cell i.fa-bitbucket {
           color: #d35400; }
-        #board .row .cell i.fa-safari {
+        #game .row .cell i.fa-safari {
           color: #34495e; }
-        #board .row .cell i.fa-apple {
+        #game .row .cell i.fa-apple {
           color: #a8bece; }
-        #board .row .cell i.fa-firefox {
+        #game .row .cell i.fa-firefox {
           color: #a71930; }
-        #board .row .cell i.fa-slack {
+        #game .row .cell i.fa-slack {
           color: #2980b9; }
