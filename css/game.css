@@ -23,4 +23,8 @@
         #board .row .cell i.fa-safari {
           color: #34495e; }
         #board .row .cell i.fa-apple {
-          color: #7f8c8d; }
+          color: #a8bece; }
+        #board .row .cell i.fa-firefox {
+          color: #a71930; }
+        #board .row .cell i.fa-slack {
+          color: #2980b9; }

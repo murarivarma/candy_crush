@@ -1,5 +1,5 @@
 Game =
-  shapes: ["twitter", "bitbucket", "safari", "apple"]
+  shapes: ["twitter", "bitbucket", "safari", "apple", "firefox", "slack"]
 
   randomShapeClass: ->
     "fa-" + Game.shapes[Math.floor(Math.random()*Game.shapes.length)]
