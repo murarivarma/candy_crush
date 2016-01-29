@@ -1,0 +1,21 @@
+{
+  "name": "candy_crush",
+  "description": "Candy Crush Game using jQuery",
+  "main": "index.js",
+  "authors": [
+    "murarivarma"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/murarivarma/candy_crush",
+  "moduleType": [
+    "es6",
+    "node"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
