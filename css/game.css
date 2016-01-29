@@ -3,7 +3,8 @@
 
 #board {
   margin: 0 auto;
-  width: 105vmin; }
+  width: 105vmin;
+  text-align: center; }
   #board .row {
     height: 10vmin; }
     #board .row .cell {
@@ -12,3 +13,14 @@
       height: 10vmin;
       background-color: #fbfcfc;
       border: 1px solid #bdc3c7; }
+      #board .row .cell i {
+        font-size: 8vmin;
+        line-height: 10vmin; }
+        #board .row .cell i.fa-twitter {
+          color: #2ecc71; }
+        #board .row .cell i.fa-bitbucket {
+          color: #d35400; }
+        #board .row .cell i.fa-safari {
+          color: #34495e; }
+        #board .row .cell i.fa-apple {
+          color: #7f8c8d; }

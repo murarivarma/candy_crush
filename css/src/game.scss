@@ -4,6 +4,7 @@
 #board {
   margin: 0 auto;
   width: 105vmin;
+  text-align: center;
   .row {
     height: 10vmin;
     .cell {
@@ -12,6 +13,27 @@
       height: 10vmin;
       background-color: #fbfcfc;
       border: 1px solid #bdc3c7;
+
+      i {
+        font-size: 8vmin;
+        line-height: 10vmin;
+
+        &.fa-twitter {
+          color: #2ecc71;
+        }
+
+        &.fa-bitbucket {
+          color: #d35400;
+        }
+
+        &.fa-safari {
+          color: #34495e;
+        }
+
+        &.fa-apple {
+          color: #7f8c8d;
+        }
+      }
     }
   }
 }
