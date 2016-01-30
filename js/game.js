@@ -7,7 +7,7 @@ Game = {
   },
   populateCellsWithShapes: function() {
     return $.each($(".cell i"), function(i, element) {
-      return $(element).addClass(Game.randomShapeClass);
+      return $(element).addClass(Game.randomShapeClass).addClass('animated').addClass('infinite');
     });
   },
   populateCellsWithCoordinates: function() {
@@ -26,14 +26,50 @@ Game = {
     Game.rowsCount = rowNo - 1;
     return Game.columnsCount = colNo - 1;
   },
+  fetchCell: function(rowNo, colNo) {
+    var selector;
+    selector = ".cell";
+    selector += "[data-row-no='" + rowNo + "']";
+    selector += "[data-col-no='" + colNo + "']";
+    return $(selector);
+  },
+  highlightCell: function(cell) {
+    return $(cell).children('i').addClass('flash');
+  },
+  possibleSwapsForClick: function(cell) {
+    var colNo, rowNo;
+    if (Game.selectedCell === null) {
+      Game.selectedCell = cell;
+      $(cell).children('i').addClass('pulse');
+      colNo = parseInt(cell.dataset.colNo);
+      rowNo = parseInt(cell.dataset.rowNo);
+      Game.highlightCell(Game.fetchCell(rowNo - 1, colNo));
+      Game.highlightCell(Game.fetchCell(rowNo + 1, colNo));
+      Game.highlightCell(Game.fetchCell(rowNo, colNo - 1));
+      return Game.highlightCell(Game.fetchCell(rowNo, colNo + 1));
+    } else {
+      return Game.deselectCell();
+    }
+  },
+  deselectCell: function() {
+    $('.cell i').removeClass('flash').removeClass('pulse');
+    return Game.selectedCell = null;
+  },
+  onClick: function() {
+    return $('.cell').click(function() {
+      return Game.possibleSwapsForClick(this);
+    });
+  },
   checkMatches: function() {
     return console.log("Checking Matches");
   },
   init: function() {
     Game.rowsCount = 0;
     Game.columnsCount = 0;
+    Game.deselectCell();
     Game.populateCellsWithShapes();
     Game.populateCellsWithCoordinates();
+    Game.onClick();
     return Game.checkMatches();
   }
 };
