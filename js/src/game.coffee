@@ -44,16 +44,20 @@ Game =
       if absDiff[0] == 0 && absDiff[1] == 1
         Game.swapCells(Game.selectedCell, cell)
       Game.deselectCell()
+  candyInCell: (cell) ->
+    $(cell).children('i')
+  findShapeClassOfCandy: (candy) ->
+    candy.attr('class').split(" ").find((classname) ->
+      classname.match(/fa\-/)?)
   swapCells: (c1, c2) ->
-    child1 = $(c1).children('i')
-    child2 = $(c2).children('i')
-    classname1 = child1.attr('class').split(" ").find((classname) ->
-      classname.match(/fa\-/)?)
-    classname2 = child2.attr('class').split(" ").find((classname) ->
-      classname.match(/fa\-/)?)
+    child1 = Game.candyInCell(c1)
+    child2 = Game.candyInCell(c2)
+    classname1 = Game.findShapeClassOfCandy(child1)
+    classname2 = Game.findShapeClassOfCandy(child2)
 
     child1.removeClass(classname1).addClass(classname2)
     child2.removeClass(classname2).addClass(classname1)
+    Game.checkMatches()
   selectCell: (cell) ->
     Game.selectedCell = cell
     $(cell).children('i').addClass('pulse')
@@ -71,8 +75,29 @@ Game =
     $('.cell').click ->
       Game.possibleSwapsForClick(@)
   checkMatches: ->
-     console.log "Checking Matches"
+    console.log "checkMatches"
+    checkingRowNo = Game.rowsCount
+    checkingColNo = 1
+    checkingShape = null
+    currentLength = 0
 
+    while checkingColNo <= Game.columnsCount
+      currentCell = Game.fetchCell(checkingRowNo, checkingColNo)
+      currentCandy = Game.candyInCell(currentCell)
+      currentShape = Game.findShapeClassOfCandy(currentCandy)
+      checkingShape = currentShape unless checkingShape?
+      if currentShape == checkingShape
+        currentLength++
+      else
+        if currentLength > 2
+          console.log "Length is greater : #{currentLength}"
+          #Remove the matching elements
+          #Bring down the elements
+          #Populate blank cells with random shapes
+          #Break the checking process
+        checkingShape = currentShape
+        currentLength = 1
+      checkingColNo++
   init: ->
     Game.rowsCount = 0
     Game.columnsCount = 0

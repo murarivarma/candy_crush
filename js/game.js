@@ -60,18 +60,23 @@ Game = {
       return Game.deselectCell();
     }
   },
+  candyInCell: function(cell) {
+    return $(cell).children('i');
+  },
+  findShapeClassOfCandy: function(candy) {
+    return candy.attr('class').split(" ").find(function(classname) {
+      return classname.match(/fa\-/) != null;
+    });
+  },
   swapCells: function(c1, c2) {
     var child1, child2, classname1, classname2;
-    child1 = $(c1).children('i');
-    child2 = $(c2).children('i');
-    classname1 = child1.attr('class').split(" ").find(function(classname) {
-      return classname.match(/fa\-/) != null;
-    });
-    classname2 = child2.attr('class').split(" ").find(function(classname) {
-      return classname.match(/fa\-/) != null;
-    });
+    child1 = Game.candyInCell(c1);
+    child2 = Game.candyInCell(c2);
+    classname1 = Game.findShapeClassOfCandy(child1);
+    classname2 = Game.findShapeClassOfCandy(child2);
     child1.removeClass(classname1).addClass(classname2);
-    return child2.removeClass(classname2).addClass(classname1);
+    child2.removeClass(classname2).addClass(classname1);
+    return Game.checkMatches();
   },
   selectCell: function(cell) {
     var colNo, coords, rowNo;
@@ -95,7 +100,32 @@ Game = {
     });
   },
   checkMatches: function() {
-    return console.log("Checking Matches");
+    var checkingColNo, checkingRowNo, checkingShape, currentCandy, currentCell, currentLength, currentShape, results;
+    console.log("checkMatches");
+    checkingRowNo = Game.rowsCount;
+    checkingColNo = 1;
+    checkingShape = null;
+    currentLength = 0;
+    results = [];
+    while (checkingColNo <= Game.columnsCount) {
+      currentCell = Game.fetchCell(checkingRowNo, checkingColNo);
+      currentCandy = Game.candyInCell(currentCell);
+      currentShape = Game.findShapeClassOfCandy(currentCandy);
+      if (checkingShape == null) {
+        checkingShape = currentShape;
+      }
+      if (currentShape === checkingShape) {
+        currentLength++;
+      } else {
+        if (currentLength > 2) {
+          console.log("Length is greater : " + currentLength);
+        }
+        checkingShape = currentShape;
+        currentLength = 1;
+      }
+      results.push(checkingColNo++);
+    }
+    return results;
   },
   init: function() {
     Game.rowsCount = 0;
